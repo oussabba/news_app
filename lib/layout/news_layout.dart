@@ -9,7 +9,10 @@ class NewsLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewsCubit(),
+      create: (context) => NewsCubit()
+        ..getBusiness()
+        ..getSports()
+        ..getScience(),
       child: BlocConsumer<NewsCubit, NewsStates>(
           builder: (context, state) {
             NewsCubit cubit = NewsCubit.get(context);
@@ -20,6 +23,7 @@ class NewsLayout extends StatelessWidget {
                   IconButton(onPressed: () {}, icon: const Icon(Icons.search))
                 ],
               ),
+              body: cubit.screens[cubit.currentIndex],
               bottomNavigationBar: BottomNavigationBar(
                 items: const [
                   BottomNavigationBarItem(
@@ -34,10 +38,10 @@ class NewsLayout extends StatelessWidget {
                     icon: Icon(Icons.science),
                     label: 'Sciences',
                   ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: 'Settings',
-                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: Icon(Icons.settings),
+                  //   label: 'Settings',
+                  // ),
                 ],
                 currentIndex: cubit.currentIndex,
                 type: BottomNavigationBarType.fixed,

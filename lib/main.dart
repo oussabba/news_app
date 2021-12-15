@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/layout/news_layout.dart';
+import 'package:news_app/shared/network/remote/dio_helper.dart';
 
 void main() {
+  DioHelper.init();
   runApp(const MyApp());
 }
 
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        primarySwatch: Colors.purple,
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle(
@@ -38,6 +41,8 @@ class MyApp extends StatelessWidget {
           selectedItemColor: Colors.purple,
         ),
       ),
+      darkTheme: ThemeData(),
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       home: const NewsLayout(),
     );
