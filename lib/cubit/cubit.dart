@@ -23,6 +23,8 @@ class NewsCubit extends Cubit<NewsStates> {
   List<dynamic> sports = [];
   List<dynamic> science = [];
 
+  bool isDark = false;
+
   void changeBottomNavBar(int index) {
     currentIndex = index;
     emit(NewsBottomNavBar());
@@ -74,5 +76,10 @@ class NewsCubit extends Cubit<NewsStates> {
       print(error.toString());
       emit(GetScienceErrorState(error.toString()));
     });
+  }
+
+  void changeMode() {
+    isDark = !isDark;
+    emit(ChangeModeState());
   }
 }

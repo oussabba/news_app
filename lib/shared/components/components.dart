@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/cubit.dart';
 import 'package:news_app/cubit/states.dart';
 
-Widget buildNewsItem(article) => Padding(
+Widget buildNewsItem(article, context) => Padding(
       padding: const EdgeInsets.all(20),
       child: Row(
         children: [
@@ -31,10 +31,7 @@ Widget buildNewsItem(article) => Padding(
                   Expanded(
                     child: Text(
                       article['title'].toString(),
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -53,11 +50,11 @@ Widget buildNewsItem(article) => Padding(
       ),
     );
 
-Widget buildScreen(list) => ConditionalBuilder(
+Widget buildScreen(list, context) => ConditionalBuilder(
       condition: list.length > 0,
       builder: (context) => ListView.separated(
           physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) => buildNewsItem(list[index]),
+          itemBuilder: (context, index) => buildNewsItem(list[index], context),
           separatorBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(

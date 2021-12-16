@@ -8,50 +8,52 @@ class NewsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NewsCubit()
-        ..getBusiness()
-        ..getSports()
-        ..getScience(),
-      child: BlocConsumer<NewsCubit, NewsStates>(
-          builder: (context, state) {
-            NewsCubit cubit = NewsCubit.get(context);
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('News app'),
-                actions: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.search))
-                ],
-              ),
-              body: cubit.screens[cubit.currentIndex],
-              bottomNavigationBar: BottomNavigationBar(
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.business),
-                    label: 'Business',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.sports),
-                    label: 'Sports',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.science),
-                    label: 'Sciences',
-                  ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(Icons.settings),
-                  //   label: 'Settings',
-                  // ),
-                ],
-                currentIndex: cubit.currentIndex,
-                type: BottomNavigationBarType.fixed,
-                onTap: (index) {
-                  cubit.changeBottomNavBar(index);
-                },
-              ),
-            );
-          },
-          listener: (context, state) {}),
-    );
+    return BlocConsumer<NewsCubit, NewsStates>(
+        builder: (context, state) {
+          NewsCubit cubit = NewsCubit.get(context);
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('News app'),
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.search),
+                ),
+                IconButton(
+                    onPressed: () {
+                      cubit.changeMode();
+                    },
+                    icon: const Icon(Icons.brightness_4_outlined))
+              ],
+            ),
+            body: cubit.screens[cubit.currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.business),
+                  label: 'Business',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.sports),
+                  label: 'Sports',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.science),
+                  label: 'Sciences',
+                ),
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.settings),
+                //   label: 'Settings',
+                // ),
+              ],
+              currentIndex: cubit.currentIndex,
+              type: BottomNavigationBarType.fixed,
+              onTap: (index) {
+                cubit.changeBottomNavBar(index);
+              },
+            ),
+          );
+        },
+        listener: (context, state) {});
   }
 }
